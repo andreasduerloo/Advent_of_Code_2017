@@ -2,6 +2,7 @@ package main
 
 import (
 	"advent2017/day_01"
+	"advent2017/day_02"
 	"fmt"
 	"os"
 	"strconv"
@@ -23,5 +24,14 @@ func main() {
 
 	solved := []func() (int, int){
 		day_01.Solve,
+		day_02.Solve,
+	}
+
+	if day <= len(solved) {
+		fmt.Println("Solutions for day", day)
+		first, second := solved[day-1]()
+		fmt.Println(first, second)
+	} else {
+		fmt.Println("That's either not a valid day, or it has not been solved (yet!)")
 	}
 }

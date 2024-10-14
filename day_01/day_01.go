@@ -1,5 +1,18 @@
 package day_01
 
+import (
+	"fmt"
+	"os"
+)
+
 func Solve() (int, int) {
-	return 0, 0
+	input, err := os.ReadFile("./inputs/01.txt")
+	if err != nil {
+		fmt.Println("Could not read the input file - exiting")
+		return 0, 0
+	}
+
+	captcha := string(input)
+
+	return solveCaptcha(captcha), solveCaptcha2(captcha)
 }
