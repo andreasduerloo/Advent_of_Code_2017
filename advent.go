@@ -3,6 +3,7 @@ package main
 import (
 	"advent2017/day_01"
 	"advent2017/day_02"
+	"advent2017/day_03"
 	"fmt"
 	"os"
 	"strconv"
@@ -25,6 +26,7 @@ func main() {
 	solved := []func() (int, int){
 		day_01.Solve,
 		day_02.Solve,
+		day_03.Solve,
 	}
 
 	if day <= len(solved) {

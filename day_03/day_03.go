@@ -1,5 +1,11 @@
 package day_03
 
 func Solve() (int, int) {
-	return 0, 0
+	// INPUT GOES HERE
+	input := 361527
+
+	layers := buildLayers(input)
+
+	first := distance(input, layers)
+	return first, 0
 }
