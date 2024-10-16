@@ -101,3 +101,73 @@ func absDiff(i, j int) int {
 		return j - i
 	}
 }
+
+// Second star, the disgusting way
+type point struct {
+	row int
+	col int
+}
+
+const (
+	RIGHT = iota
+	UP
+	LEFT
+	DOWN
+)
+
+func spiral(in int) int {
+	spiral := make(map[point]int)
+
+	currentPoint := point{0, 0}
+	spiral[currentPoint] = 1
+
+	steps := 0
+	stepsToSwitch := 0
+	second := false
+	direction := 0
+	last := 1
+
+	for last < in {
+		switch direction % 4 {
+		case RIGHT:
+			currentPoint = point{currentPoint.row, currentPoint.col + 1}
+		case UP:
+			currentPoint = point{currentPoint.row - 1, currentPoint.col}
+		case LEFT:
+			currentPoint = point{currentPoint.row, currentPoint.col - 1}
+		case DOWN:
+			currentPoint = point{currentPoint.row + 1, currentPoint.col}
+		}
+		spiral[currentPoint] = sumNeighbors(currentPoint, spiral)
+		last = spiral[currentPoint]
+		// fmt.Println(direction%4, last, currentPoint)
+
+		if steps == stepsToSwitch {
+			direction++
+			steps = 0
+			if second {
+				stepsToSwitch += 1
+			}
+			second = !second
+		} else {
+			steps++
+		}
+	}
+
+	return last
+}
+
+func sumNeighbors(p point, s map[point]int) int {
+	var out int
+
+	out += s[point{p.row, p.col + 1}]
+	out += s[point{p.row, p.col - 1}]
+	out += s[point{p.row + 1, p.col + 1}]
+	out += s[point{p.row + 1, p.col - 1}]
+	out += s[point{p.row + 1, p.col}]
+	out += s[point{p.row - 1, p.col}]
+	out += s[point{p.row - 1, p.col + 1}]
+	out += s[point{p.row - 1, p.col - 1}]
+
+	return out
+}

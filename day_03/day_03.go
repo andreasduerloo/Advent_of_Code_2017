@@ -7,5 +7,6 @@ func Solve() (int, int) {
 	layers := buildLayers(input)
 
 	first := distance(input, layers)
-	return first, 0
+	second := spiral(input)
+	return first, second
 }
