@@ -14,11 +14,9 @@ func Solve() (int, int) {
 	}
 
 	instructions := helpers.ReGetInts(string(input))
-
 	first := execute(instructions)
 
 	instructions = helpers.ReGetInts(string(input))
-
 	second := execute2(instructions)
 
 	return first, second
