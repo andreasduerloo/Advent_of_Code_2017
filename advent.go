@@ -7,6 +7,7 @@ import (
 	"advent2017/day_04"
 	"advent2017/day_05"
 	"advent2017/day_06"
+	"advent2017/day_07"
 	"fmt"
 	"os"
 	"strconv"
@@ -33,6 +34,7 @@ func main() {
 		day_04.Solve,
 		day_05.Solve,
 		day_06.Solve,
+		day_07.Solve,
 	}
 
 	if day <= len(solved) {
