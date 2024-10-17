@@ -15,7 +15,8 @@ func Solve() (int, int) {
 
 	memBanks := helpers.ReGetInts(string(input))
 
-	first := cycle(memBanks)
+	//first := cycle(memBanks)
+	first, second := cycle2(memBanks)
 
-	return first, 0
+	return first, second
 }

@@ -19,6 +19,20 @@ func cycle(mem []int) int {
 	return cycles
 }
 
+func cycle2(mem []int) (int, int) {
+	var cycles int
+	states := make(map[string](int))
+
+	// Loop de loop
+	for states[buildState(mem)] == 0 { // Issue: we would not catch the initial state re-appearing! Use cycles + 1? Very ugly.
+		states[buildState(mem)] = cycles
+		mem = shuffle(mem)
+		cycles++
+	}
+
+	return cycles, cycles - states[buildState(mem)]
+}
+
 func shuffle(mem []int) []int {
 	// Make a local copy?
 	highest := indexMax(mem)
