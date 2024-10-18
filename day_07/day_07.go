@@ -26,16 +26,6 @@ func Solve() (int, int) {
 
 	// Second star
 	calculateWeights(current)
-	/*
-		var done bool
-		var shouldBe int
-
-		for !done {
-			done, current, shouldBe = findMissing(current)
-		}
-
-		fmt.Println(shouldBe)
-	*/
 	fmt.Println(correctWeight(current, 0))
 
 	return 0, 0
