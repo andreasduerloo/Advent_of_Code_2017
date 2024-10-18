@@ -63,7 +63,7 @@ func linkNodes(m map[string]*node) {
 	}
 }
 
-// Function that recursively calculates weights - use memoization
+// Function that recursively calculates weights
 func calculateWeights(root *node) int {
 	subWeight := root.weight
 
@@ -73,4 +73,49 @@ func calculateWeights(root *node) int {
 
 	root.subWeight = subWeight
 	return subWeight
+}
+
+func correctWeight(n *node, shouldBe int) int {
+	// Does this node have children?
+	if len(n.children) > 0 {
+		// Is the weight of the children always the same?
+
+		// Collect all the weights
+		weightMap := make(map[int][]*node)
+
+		for _, c := range n.children {
+			weightMap[c.subWeight] = append(weightMap[c.subWeight], c)
+		}
+
+		// If there's only one key, all the children have the same subWeight
+		if len(weightMap) == 1 {
+			// That means this node is the issue
+			// We adapt its weight so that the sum of all the subWeights and its own weight equals 'shouldBe'
+			var totalSubWeights int
+
+			for k, v := range weightMap {
+				totalSubWeights += k * len(v)
+			}
+
+			return shouldBe - totalSubWeights
+		} else {
+			// We have a node with a different subWeight than the others - time for recursion
+			var normalWeight int
+			var oddNode *node
+
+			for k, v := range weightMap {
+				if len(v) == 1 {
+					oddNode = v[0]
+				} else {
+					normalWeight = k
+				}
+			}
+
+			return correctWeight(oddNode, normalWeight)
+		}
+
+	} else {
+		// This node doesn't have any children, so it is the one with the issue
+		return shouldBe
+	}
 }
