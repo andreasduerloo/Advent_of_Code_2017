@@ -13,6 +13,7 @@ type node struct {
 	childrenString []string
 	parent         *node
 	children       []*node
+	subWeight      int
 }
 
 func parse(input []byte) (map[string]*node, []*node) {
@@ -60,4 +61,16 @@ func linkNodes(m map[string]*node) {
 			}
 		}
 	}
+}
+
+// Function that recursively calculates weights - use memoization
+func calculateWeights(root *node) int {
+	subWeight := root.weight
+
+	for _, c := range root.children {
+		subWeight += calculateWeights(c)
+	}
+
+	root.subWeight = subWeight
+	return subWeight
 }

@@ -24,5 +24,12 @@ func Solve() (int, int) {
 
 	fmt.Println(current.name)
 
+	calculateWeights(current)
+
+	fmt.Println(current.subWeight)
+	for _, c := range current.children {
+		fmt.Println(c.subWeight)
+	}
+
 	return 0, 0
 }
